@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "0d37a8dc-abdd-45f4-9558-d3ce67f4e64c",
+		"name": "CFD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"abc@gmail.com\",\r\n    \"password\": \"456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/login",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dangthuyen@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/register",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessToken\": \"{{token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/refresh-token",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"avatar\": \"https://s3-ap-southeast-1.amazonaws.com/kipalog.com/alkylumvji_3.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/profile/update",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Get Course",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/course/:slug",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"course",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "cfd2-web-responsive"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"phone\": \"\",\r\n    \"email\": \"\",\r\n    \"fb\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/course-register/:slug",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"course-register",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "cfd2-web-responsive"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course Related",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/elearning/v4/course-related/:slug",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"elearning",
+								"v4",
+								"course-related",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "cfd2-web-responsive"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"AAAAA\",\r\n    \"fb\": \"fb\",\r\n    \"content\": \"noi dung\",\r\n    \"phone\": \"984984234234\",\r\n    \"email\":\"adfasdfasdfsdf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/elearning/v4/contact",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"elearning",
+						"v4",
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/elearning/v4/home",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"elearning",
+						"v4",
+						"home"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
