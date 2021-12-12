@@ -1,19 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth";
+import { useSelector, useDispatch } from "react-redux";
+import { openLoginAction } from "../../store/actions/authActions";
+import { useTranslate } from "../../core";
 
-export function Header({openLogin}) {
+export function Header({ openLogin }) {
+  /* Redux */
 
-  let { user, logout, toggleLogin } = useAuth();
+  const dispatch = useDispatch()
+  let { user } = useSelector((store) => store.auth);
 
+  /* Redux */
+
+  // let { user, logout, toggleLogin } = useAuth();
+
+  const toggleMenu = ()=>{
+    document.body.classList.toggle('menu-is-show')
+  }
+
+  /*Test prosp component*/
   // const showLogin3=(show)=>{
   //    openLogin(show)
   // }
+  /*Test prosp component*/
+
+  const {selectLang}=  useTranslate()
+  const changeLang =(ev)=>{
+    let value= ev.currentTarget.value
+    selectLang(value)
+  }
 
   return (
     <header id="header">
       <div className="wrap">
-        <div className="menu-hambeger">
+        <div className="menu-hambeger" onClick={toggleMenu}>
           <div className="button">
             <span />
             <span />
@@ -26,6 +47,17 @@ export function Header({openLogin}) {
           <h1>CFD</h1>
         </Link>
         <div className="right">
+
+
+
+
+          <select name="" id=""  onChange={changeLang}>
+            <option value="en">English</option>
+            <option value="vn">Viet Nam</option>
+          </select>
+
+
+
           {user ? (
             <div className="have-login">
               <div className="account">
@@ -43,8 +75,10 @@ export function Header({openLogin}) {
                 <Link
                   to="/"
                   onClick={(e) => {
-                    logout();
+                    // logout();
                     e.preventDefault();
+
+                    dispatch({type:"LOGOUT_SUCCESS"})
                   }}
                 >
                   Đăng xuất
@@ -57,12 +91,14 @@ export function Header({openLogin}) {
                 to="#"
                 className="btn-register"
                 onClick={(e) => {
-
                   e.preventDefault();
 
-                  toggleLogin(true)
+                  // toggleLogin(true)
 
                   // showLogin3(true)
+
+                  // dispatch(({type:"OPEN_LOGIN"}))
+                  dispatch(openLoginAction())
                 }}
               >
                 Đăng nhập

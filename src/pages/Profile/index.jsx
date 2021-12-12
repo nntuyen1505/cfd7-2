@@ -3,10 +3,15 @@ import {AccountInformation, ProjectDone, YourCourse, PaymentHistory, MyCoin} fro
 import { Prompt, Route, Switch, useHistory, useRouteMatch } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../hook/useAuth'
+import { useSelector } from 'react-redux'
 
 export default function Profile() {
 
-  let {user} = useAuth()
+  // let {user} = useAuth()
+
+
+
+const {user} = useSelector((store)=>store.auth)
 
 const history =useHistory()
   const  handleClick=()=>{
@@ -30,8 +35,8 @@ const history =useHistory()
         <div className="container">
           <div className="tab">
             <div className="tab-title">
-              <NavLink to={`${url}`} exact>Thông tin tài khoản</NavLink>
-              <NavLink to={`${url}/khoa-hoc`}>Khóa học của bạn</NavLink>
+              <NavLink exact to={`${url}`} >Thông tin tài khoản</NavLink>
+              <NavLink to={`${url}/khoa-hoc`} >Khóa học của bạn</NavLink>
               <NavLink to={`${url}/du-an`}>Dự án đã làm</NavLink>
               <NavLink to={`${url}/lich-su`}>Lịch sử thanh toán</NavLink>
               <NavLink to={`${url}/coin`}>Quản lý COIN của tôi</NavLink>
@@ -39,10 +44,10 @@ const history =useHistory()
             <div className="tab-content">
             <Switch>
               <Route path={`${url}`} exact component={AccountInformation}/>
-              <Route path={`${url}/khoa-hoc`} exact component={YourCourse}/>
-              <Route path={`${url}/du-an`} exact component={ProjectDone}/>
-              <Route path={`${url}/lich-su`} exact component={PaymentHistory}/>
-              <Route path={`${url}/coin`} exact component={MyCoin}/>
+              <Route path={`${url}/khoa-hoc`} component={YourCourse}/>
+              <Route path={`${url}/du-an`} component={ProjectDone}/>
+              <Route path={`${url}/lich-su`} component={PaymentHistory}/>
+              <Route path={`${url}/coin`} component={MyCoin}/>
             </Switch>
             </div>
           </div>

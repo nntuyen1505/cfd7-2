@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AuthSevices from "../../services/authSevices";
+import { useDispatch, useSelector } from "react-redux";
+import { updateInfoAction } from "../../../store/actions/authActions";
 
 const rgPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
 
@@ -17,18 +19,49 @@ const infoSchema = yup.object().shape({
 });
 
 export function AccountInformation() {
+
+/*Redux */
+
+const dispatch = useDispatch()
+  
+
+
+ const onSubmit = async (dataUpdateInfo) => {
+    // console.log(dataUpdateInfo)
+    // alert(JSON.stringify(dataUpdateInfo));
+
+    alert("Thành Công!");
+
+    let res = await AuthSevices.updateInfo(dataUpdateInfo);
+
+    if(res.data){
+      dispatch(updateInfoAction(res.data))
+    }
+
+  };
+
+/*Redux */
+
+
+
   /*Validate-Form */
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(infoSchema) });
-  const onSubmit = async (dataUpdateInfo) => {
-    // console.log(dataUpdateInfo)
-    // alert(JSON.stringify(dataUpdateInfo));
-    alert("Thành Công!");
-    let res = await AuthSevices.updateInfo(dataUpdateInfo);
-  };
+
+
+  // const onSubmit = async (dataUpdateInfo) => {
+  //   // console.log(dataUpdateInfo)
+  //   // alert(JSON.stringify(dataUpdateInfo));
+  //   alert("Thành Công!");
+  //   let res = await AuthSevices.updateInfo(dataUpdateInfo);
+  // };
+
+  /*Validate-Form */
+
 
   return (
     <form className="tab1" onSubmit={handleSubmit(onSubmit)}>

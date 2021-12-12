@@ -16,7 +16,7 @@ export function Nav() {
             <Link to="#">CFD Team</Link>
           </li>
           <li>
-            <Link to="#">Khóa Học</Link>
+            <Link to="/khoa-hoc">Khóa Học</Link>
           </li>
           <li>
             <Link to="#">Dự Án</Link>

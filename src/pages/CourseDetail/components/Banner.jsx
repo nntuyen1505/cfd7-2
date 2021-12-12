@@ -6,12 +6,12 @@ export default function Banner({data}) {
         <section className="banner style2" style={{background: '#cde6fb'}}>
           <div className="container">
             <div className="info">
-              <h1>{data.title}</h1>
+              <h1>{data?.title}</h1>
               <div className="row">
-                <div className="date"><strong>Khai giảng:</strong>{data.close_time}</div>
+                <div className="date"><strong>Khai giảng:</strong>{data?.close_time}</div>
                 <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
               </div>
-              <Link to={"/dang-ky/"+data.slug} className="btn white round" style={{colorBtn: '#70b6f1'}}>đăng ký</Link>
+              <Link to={"/dang-ky/"+data?.slug} className="btn white round" style={{colorBtn: '#70b6f1'}}>đăng ký</Link>
             </div>
           </div>
           <div className="bottom">
@@ -21,7 +21,7 @@ export default function Banner({data}) {
                   <img src="img/play-icon-white.png" alt="" />
                 </div> <span>giới thiệu</span>
               </div>
-              <div className="money">{data.money} VND</div>
+              <div className="money">{data?.money} VND</div>
             </div>
           </div>
         </section>

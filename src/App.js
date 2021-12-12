@@ -19,8 +19,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginModal from "./pages/LoginModal";
 import PrivateRouter from "./components/PrivateRouter";
 import AuthSevices from "./pages/services/authSevices";
-import store from "./store";
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const Context = createContext();
 
@@ -41,40 +40,47 @@ function App() {
 
   /*Vi du localstorage  */
 
-  const [openLogin, setOpenLogin] = useState(false);
+  // const [openLogin, setOpenLogin] = useState(false);
 
-  const toggleLogin = (flag) => {
-    if (openLogin === "undefined") {
-      setOpenLogin(!openLogin);
-    } else {
-      setOpenLogin(flag);
-    }
-  };
+  // const toggleLogin = (flag) => {
+  //   if (openLogin === "undefined") {
+  //     setOpenLogin(!openLogin);
+  //   } else {
+  //     setOpenLogin(flag);
+  //   }
+  // };
+
+  /*Redux */
+
+  let {user} = useSelector(store=>store.auth)
+  let {data} = useSelector(store=>store.course)
+  // console.log(user)
+
+  /*Redux */
 
   /* Call API Login-Authorization */
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("data")) || null
-  );
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("data")) || null);
 
-  const login = async (user) => {
-    let dataLogin = await AuthSevices.login(user);
+  // const login = async (user) => {
+  //   let dataLogin = await AuthSevices.login(user);
 
-    if (dataLogin.data) {
-      setUser(dataLogin.data);
-    } else {
-      return dataLogin.error;
-    }
-/*Khi đăng nhập thành công -> sẽ gửi lên browser 1 accessToken */
-    localStorage.setItem("token",JSON.stringify(dataLogin.data.token))
-    localStorage.setItem("data", JSON.stringify(dataLogin.data));
-  };
+  //   if (dataLogin.data) {
+  //     setUser(dataLogin.data);
+  //   } else {
+  //     return dataLogin.error;
+  //   }
+  //   /*Khi đăng nhập thành công -> sẽ gửi lên browser 1 accessToken */
+  //   localStorage.setItem("token", JSON.stringify(dataLogin.data.token));
+  //   localStorage.setItem("data", JSON.stringify(dataLogin.data));
+  // };
 
-  const logout = () => {
-    setUser(null);
+  // const logout = () => {
+  //   // setUser(null);
 
-    localStorage.removeItem("data");
-  };
+  //   localStorage.removeItem("data");
+  //   localStorage.removeItem("token");
+  // };
 
   /* Call API Login-Authorization */
 
@@ -86,34 +92,43 @@ function App() {
     setShowLogin(show);
   };
 
+  const closeLoginApp = (offShow)=>{
+    setShowLogin(offShow);
+  }
+
   /*test props function */
 
   return (
     <BrowserRouter>
-    <Provider store={store}>
-      <Context.Provider value={{ user, login, logout, openLogin, toggleLogin }}>
-        <Header openLogin={openLoginApp} />
-        <Nav />
-        {!user && <LoginModal PropsShowLogin={showLogin} />}
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/gioi-thieu" component={Introduce} />
-          <Route path="/khoa-hoc" component={Course} />
-          <Route path="/chi-tiet-khoa-hoc/:slug" component={CourseDetail} />
-          <Route path="/san-pham" component={Project} />
-          <PrivateRouter path="/thong-tin-ca-nhan" component={Profile} />
-          <Route path="/faq" component={Faq} />
-          <Route path="/email" component={Email} />
-          <Route path="/hop-tac" component={Cooperate} />
-          <Route path="/thanh-toan" component={Payment} />
-          <Route path="/dang-ky/:slug" component={Register} />
-          <Route path="/team" component={Team} />
-          <Route path="/demo" component={Demo} />
-          <Route component={Page404} />
-        </Switch>
-        <Footer />
-      </Context.Provider>
-      </Provider>
+    {/* Sử dụng context */}
+        {/* <Context.Provider value={{ user, login, logout, openLogin, toggleLogin }}> */}
+    {/* Sử dụng context */}
+
+    {/* Sử dụng Redux */}
+        <Context.Provider value={{ user,data }}>
+    {/* Sử dụng Redux */}
+
+          <Header openLogin={openLoginApp} />
+          <Nav />
+          {!user && <LoginModal PropsShowLogin={showLogin} closelogin={closeLoginApp}/>}
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/gioi-thieu" component={Introduce} />
+            <Route path="/khoa-hoc" component={Course} />
+            <Route path="/chi-tiet-khoa-hoc/:slug" component={CourseDetail} />
+            <Route path="/san-pham" component={Project} />
+            <PrivateRouter path="/thong-tin-ca-nhan" component={Profile} />
+            <Route path="/faq" component={Faq} />
+            <Route path="/email" component={Email} />
+            <Route path="/hop-tac" component={Cooperate} />
+            <Route path="/thanh-toan" component={Payment} />
+            <Route path="/dang-ky/:slug" component={Register} />
+            <Route path="/team" component={Team} />
+            <Route path="/demo" component={Demo} />
+            <Route component={Page404} />
+          </Switch>
+          <Footer />
+        </Context.Provider>
     </BrowserRouter>
   );
 }

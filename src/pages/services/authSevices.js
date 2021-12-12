@@ -22,12 +22,12 @@ const AuthSevices = {
             body: JSON.stringify(dataUpdateInfo),
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${api}`
+                Authorization: `Bearer ${token}`
             }
+        }
+        return fetch(urlUpdateInfo, optionUpdateInfo).then((res) => handleResponse(res, urlUpdateInfo, optionUpdateInfo))
     }
-    return fetch(urlUpdateInfo, optionUpdateInfo).then((res) => handleResponse(res, urlUpdateInfo, optionUpdateInfo))
-}
-    
+
 
 
 }

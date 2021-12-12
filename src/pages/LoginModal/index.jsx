@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../hook/useAuth";
+import { useSelector, useDispatch } from "react-redux";
+import AuthSevices from "../services/authSevices";
+import { closeLoginAction, errorLogin, fetchLogin, loginSuccess } from "../../store/actions/authActions";
 
 const LoginSchema = yup
   .object({
@@ -16,13 +19,66 @@ const LoginSchema = yup
   })
   .required();
 
-export default function LoginModal({ PropsShowLogin }) {
+export default function LoginModal({ PropsShowLogin, closelogin }) {
 
-  const [errorLogin,  setErrorLogin]=useState('')
+  /*Redux */
+  const  dispatch= useDispatch()
 
-  let { login, openLogin, toggleLogin } = useAuth();
+  const {user,openLogin,error} = useSelector((store)=>store.auth)
+  // console.log(openLogin)
+
+  // const[error, setError]=useState('')
+
+  const onSubmit = async (dataFormLogin) => {
+
+    dispatch(fetchLogin(dataFormLogin))
+
+/***************************/
+    // let dataLogin = await AuthSevices.login(dataFormLogin);
+
+    // console.log(dataLogin);
+
+    // if (dataLogin.data) {
+    //   dispatch(loginSuccess(dataLogin.data))
+    // } else if(dataLogin.error){
+    //   dispatch(errorLogin(dataLogin.error))
+    // }
+
+
+    // if (dataLogin.data) {
+    //   dispatch({
+    //     type:"LOGIN_SUCCESS",
+    //     payload: dataLogin.data
+    //   })
+    // } else if(dataLogin.error){
+    //   dispatch({
+    //     type:"ERROR_LOGIN",
+    //     payload: dataLogin.error
+    //   })
+    // }
+/***************************/
+
+    /*Khi đăng nhập thành công -> sẽ gửi lên browser 1 accessToken */
+    // localStorage.setItem("token", JSON.stringify(dataLogin.data.token));
+    // localStorage.setItem("data", JSON.stringify(dataLogin.data));
+      
+  };
+
+  /*Redux */
+  
+
+  // const [errorLogin,  setErrorLogin]=useState('')
+
+  // let { login, openLogin, toggleLogin } = useAuth();
 
   /*Validate-Form */
+
+  /*Test CloseLogin */
+ const  closeLogin3=(offShow)=>{
+    closelogin(offShow)
+  }
+  /*Test CloseLogin */
+
   const {
     register,
     handleSubmit,
@@ -31,31 +87,34 @@ export default function LoginModal({ PropsShowLogin }) {
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmit = async (data) => {
-    // alert(JSON.stringify(data));
-    // console.log(data);
+  // const onSubmit = async (data) => {
+  //   // alert(JSON.stringify(data));
+  //   // console.log(data);
 
-   let res=  await login(data)
+  //  let res=  await login(data)
 
-      if( res ){
-        setErrorLogin(res)
-      }else{
-        toggleLogin(false);
-      }
+  //     if( res ){
+  //       setErrorLogin(res)
+  //     }else{
+  //       toggleLogin(false);
+  //     }
       
-  };
+  // };
   /*Validate-Form */
 
   return (
+
     <Modal>
       <div
         className="popup-form popup-login"
 
-        // style={{ display: showLogin ? "flex" : "none" }}
+        // style={{ display: PropsShowLogin ? "flex" : "none" }}
 
         style={{display:openLogin?"flex":"none"}}
 
-        onClick={()=>toggleLogin(false)}
+        // onClick={()=>toggleLogin(false)}
+        
+        onClick={()=>dispatch(closeLoginAction())}
       >
         <div className="wrap" onClick={(e) => e.stopPropagation()}>
           {/* login-form */}
@@ -66,7 +125,7 @@ export default function LoginModal({ PropsShowLogin }) {
           >
             <h2 className="title">Đăng nhập</h2>
 
-            <p className="error-login">{errorLogin}</p>
+           <p className="error-login">{error}</p>
 
             <input
               type="text"
@@ -106,7 +165,11 @@ export default function LoginModal({ PropsShowLogin }) {
               className="close"
               onClick={(e) => {
                 e.preventDefault();
-                toggleLogin(false);           
+                // toggleLogin(false);   
+
+                // closeLogin3(false);
+                
+                dispatch(closeLoginAction())
               }}
             >
               <img src="img/close-icon.png" alt="" />

@@ -9,34 +9,45 @@ import Different from "./components/Different";
 
 import Gallery from "./components/Gallery";
 import Testimonial from "./components/Testimonial";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import store from "../../store";
+import { fetchHome } from "../../store/actions/authActions";
+import { useTranslate } from "../../core";
 
 export default function Home() {
 
+const dispatch = useDispatch()
+const {data,loading} =useSelector((store)=>store.course)
 
 
-const defineRedux = useSelector(store => store)
-console.log(defineRedux)
+/*Redux- thunk */
+useEffect((data) => {
+  if(!data){
+    dispatch(fetchHome(data))
+  }
+}, [])
+/*Redux- thunk */
+
 
 
 /*Call  API Page Home */
-  const [state, setState] = useState({
-    loading: true,
-    data: {},
-  });
-  useEffect(async () => {
-    let data = await courseSevices.home()
-    if (data) {
-      setState({
-        loading: false,
-        data: data,
-      });
-    }
-  }, []);
+  // const [state, setState] = useState({
+  //   loading: true,
+  //   data: {},
+  // });
+  // useEffect(async () => {
+  //   let data = await courseSevices.home()
+  //   if (data) {
+  //     setState({
+  //       loading: false,
+  //       data: data,
+  //     });
+  //   }
+  // }, []);
 /*Call  API Page Home */
+const {t}= useTranslate()
 
-  if(state.loading){
+  if(loading){
     return <Loading/>
   }
 
@@ -45,13 +56,13 @@ console.log(defineRedux)
       <Banner />
       <ListCourse
         maintitle="Khóa học Offline"
-        topdes="The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal"
-        list={state.data.offline}
+        topdes={t("The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal")}
+        list={data.offline}
       />
-      <ListCourse maintitle="Khóa học Online" list={state.data.online} />
+      <ListCourse maintitle="Khóa học Online" list={data.online} />
       <Different />
-      <Testimonial review={state.data.review} />
-      <Gallery gallery={state.data.gallery} />
+      <Testimonial review={data.review} />
+      <Gallery gallery={data.gallery} />
       <Action />
     </main>
   );

@@ -1,0 +1,7 @@
+export const OPEN_LOGIN = 'OPEN_LOGIN'
+export const CLOSE_LOGIN = 'CLOSE_LOGIN'
+export const UPDATE_INFO = 'UPDATE_INFO'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const ERROR_LOGIN = 'ERROR_LOGIN'
+export const HOME = 'HOME'
+export const COURSE_DETAIL = 'COURSE_DETAIL'

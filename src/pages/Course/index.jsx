@@ -2,22 +2,39 @@ import React, {useState, useEffect } from "react";
 import { ListCourse } from "../../components/ListCourse";
 import Loading from "../../components/Loading";
 import courseSevices from "../services/courseSevices";
+import  {useSelector, useDispatch}  from  'react-redux'
+import { fetchHome } from "../../store/actions/authActions";
 
 export default function Course() {
- const [state,setState] = useState({
-   loading:true,
-   data:{}
- })
- useEffect(async() => {
-  let data=await courseSevices.home()
-  if(data){
-    setState({
-      loading:false,
-      data:data
-    })
-  }
+/*Redux */
+ const {data,loading} = useSelector(store => store.course)
+ const dispatch = useDispatch()
+ console.log(data)
+ useEffect(() => {
+   if(!data){
+
+     dispatch(fetchHome(data))
+     
+   }
  }, [])
- if(state.loading){
+ 
+/*Redux */
+
+
+//  const [state,setState] = useState({
+//    loading:true,
+//    data:{}
+//  })
+//  useEffect(async() => {
+//   let data=await courseSevices.home()
+//   if(data){
+//     setState({
+//       loading:false,
+//       data:data
+//     })
+//   }
+//  }, [])
+ if(loading){
    return  <Loading/>
  }
 
@@ -28,9 +45,9 @@ export default function Course() {
         topdes="The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less"
         subtitle="KHÓA HỌC"
         maintitle="ONLINE"
-        list={state.data.offline}
+        list={data.offline}
       />
-      <ListCourse subtitle="KHÓA HỌC" maintitle="ONLINE" list={state.data.online} />
+      <ListCourse subtitle="KHÓA HỌC" maintitle="ONLINE" list={data.online} />
      
     </main>
   );
