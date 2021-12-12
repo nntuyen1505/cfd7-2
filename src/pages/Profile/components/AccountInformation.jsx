@@ -23,7 +23,6 @@ export function AccountInformation() {
 /*Redux */
 
 const dispatch = useDispatch()
-  
 
 
  const onSubmit = async (dataUpdateInfo) => {

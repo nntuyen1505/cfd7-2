@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { numberWithCommas } from '../../../utils/numberWithCommas'
 
 export default function Banner({data}) {
     return (
@@ -11,7 +12,7 @@ export default function Banner({data}) {
                 <div className="date"><strong>Khai giảng:</strong>{data?.close_time}</div>
                 <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
               </div>
-              <Link to={"/dang-ky/"+data?.slug} className="btn white round" style={{colorBtn: '#70b6f1'}}>đăng ký</Link>
+              <Link to={"/dang-ky/"+data?.slug} className="btn white round ">đăng ký</Link>
             </div>
           </div>
           <div className="bottom">
@@ -21,7 +22,9 @@ export default function Banner({data}) {
                   <img src="img/play-icon-white.png" alt="" />
                 </div> <span>giới thiệu</span>
               </div>
-              <div className="money">{data?.money} VND</div>
+              {data?.money && (
+                <div className="money">{numberWithCommas(data?.money)} VND</div>
+              )}
             </div>
           </div>
         </section>

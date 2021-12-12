@@ -15,6 +15,13 @@ export default function CourseDetail() {
 
   const {slug} = useParams()
 
+  useEffect(() => {
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }, [])
+
   const {data,loading} = useSelector((store) => store.course)
 
   const dispatch= useDispatch()
@@ -23,7 +30,7 @@ export default function CourseDetail() {
     dispatch(fetchCourseDetail(slug))
   }, [slug])
 
-  console.log(data)
+  // console.log(data)
 
 /*Redux */
 

@@ -3,43 +3,44 @@ import Loading from "../../components/Loading";
 import { useParams } from "react-router";
 import courseSevices from "../services/courseSevices";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+import { numberWithCommas } from "../../utils/numberWithCommas";
 
 const rgPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
 
-const schema = yup.object({
+const schema = yup
+  .object({
+    fullname: yup.string().required("Vui lòng nhập tên!"),
 
-  fullname: yup.string().required("Vui lòng nhập tên!"),
+    phone: yup.string().matches(rgPhone, "Vui lòng nhập SĐT!").required(),
 
-  phone: yup.string().matches(rgPhone, "Vui lòng nhập SĐT!").required(),
+    email: yup.string().email().required("Vui lòng nhập vào email!"),
 
-  email: yup.string().email().required("Vui lòng nhập vào email!"),
-
-  url: yup.string().url().required('Vui lòng nhập url'),
-
-}).required();
-
+    url: yup.string().url().required("Vui lòng nhập url"),
+  })
+  .required();
 
 /********************************* */
 export default function Register() {
   const { slug } = useParams();
 
-/*Validate-Form */
-  const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
+  /*Validate-Form */
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
   const onSubmit = async (dataRegister) => {
-
     // console.log(dataRegister)
 
     // alert(JSON.stringify(dataRegister));
 
-    let res =  await courseSevices.register(slug,dataRegister)
-
-  }
-/*Validate-Form */
+    let res = await courseSevices.register(slug, dataRegister);
+  };
+  /*Validate-Form */
 
   const [state, setState] = useState({
     data: {},
@@ -55,7 +56,6 @@ export default function Register() {
       });
     }
   }, [slug]);
-
 
   if (state.loading) {
     return <Loading />;
@@ -74,9 +74,12 @@ export default function Register() {
               <div className="time">
                 <strong>Thời lượng:</strong> 18 buổi
               </div>
-              <div className="time">
-                <strong>Học phí:</strong> {state.data.money} VND
-              </div>
+              {state.data?.money && (
+                <div className="time">
+                  <strong>Học phí:</strong> {numberWithCommas(state.data.money)}
+                  VND
+                </div>
+              )}
             </div>
 
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +90,7 @@ export default function Register() {
                 <input
                   type="text"
                   placeholder="Họ và tên bạn"
-                  {...register("fullname")}   
+                  {...register("fullname")}
                 />
               </label>
               <p className="error-text">{errors.fullname?.message}</p>
@@ -97,11 +100,11 @@ export default function Register() {
                 </p>
                 <input
                   type="text"
-                  placeholder="Số điện thoại"                       
-                  {...register("phone")}   
-                  />
+                  placeholder="Số điện thoại"
+                  {...register("phone")}
+                />
               </label>
-                <p className="error-text">{errors.phone?.message}</p>
+              <p className="error-text">{errors.phone?.message}</p>
 
               <label>
                 <p>
@@ -109,22 +112,22 @@ export default function Register() {
                 </p>
                 <input
                   type="text"
-                  placeholder="Email của bạn"         
-                  {...register("email")}   
+                  placeholder="Email của bạn"
+                  {...register("email")}
                 />
               </label>
-              <p className="error-text">{errors.email?.message}</p>       
+              <p className="error-text">{errors.email?.message}</p>
               <label>
                 <p>
                   URL Facebook<span>*</span>
                 </p>
                 <input
                   type="text"
-                  placeholder="https://facebook.com"    
-                  {...register("url")}   
-                  />
+                  placeholder="https://facebook.com"
+                  {...register("url")}
+                />
               </label>
-                <p className="error-text">{errors.url?.message}</p>
+              <p className="error-text">{errors.url?.message}</p>
               <label className="disable">
                 <p>Sử dụng COIN</p>
                 <div className="checkcontainer">
@@ -149,11 +152,10 @@ export default function Register() {
                 <p>Ý kiến cá nhân</p>
                 <input
                   type="text"
-                  placeholder="Mong muốn cá nhân và lịch bạn có thể học."  
-                  name="context"         
-                  {...register('context')}                   
+                  placeholder="Mong muốn cá nhân và lịch bạn có thể học."
+                  name="context"
+                  {...register("context")}
                 />
-                
               </label>
               <button className="btn main rect" type="submit">
                 đăng ký

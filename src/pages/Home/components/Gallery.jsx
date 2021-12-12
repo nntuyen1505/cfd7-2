@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 
 let $ = window.$;
-export default function Gallery({ gallery }) {
+export default function Gallery({ gallery=[] }) {
   useEffect(() => {
     let $carouselGallery = $(".homepage .section-gallery .list"),
       $progressBar = $(".homepage .section-gallery .timeline .process");

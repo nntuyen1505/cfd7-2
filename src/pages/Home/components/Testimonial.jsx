@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 let $ = window.$;
 
-export default function Testimonial({ review }) {
+export default function Testimonial({ review=[] }) {
   useEffect(() => {
     if ($(".section-testimonial").length) {
       var $carousel = $(".section-testimonial .images .list").flickity({

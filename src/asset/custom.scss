@@ -1,27 +1,33 @@
-.error-text {
-    color: red;
-    font-size: 13px;
-    text-align: center;
-    position: relative;
-    top: -22px;
-    left: 33%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.loadingPage {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    p {
-        font-size: 20px;
-        color: purple;
-    }
-}
-
-.error-login {
-    color: red;
-    font-size: 13px;
-}
+        .error-text {
+            color: red;
+            font-size: 13px;
+            text-align: center;
+            position: relative;
+            top: -22px;
+            left: 33%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .loadingPage {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p {
+                font-size: 20px;
+                color: purple;
+            }
+        }
+        
+        .error-login {
+            color: red;
+            font-size: 13px;
+        }
+        
+        .course-detail .banner .info .btn {
+            margin-top: 40px;
+            border: 1px solid var(--color-btn);
+            background: #00afab;
+        }

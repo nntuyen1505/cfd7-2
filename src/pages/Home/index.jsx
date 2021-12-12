@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { ListCourse } from "../../components/ListCourse";
 import Loading from "../../components/Loading";
@@ -15,22 +14,25 @@ import { fetchHome } from "../../store/actions/authActions";
 import { useTranslate } from "../../core";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const { data, loading } = useSelector((store) => store.course);
 
-const dispatch = useDispatch()
-const {data,loading} =useSelector((store)=>store.course)
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
+  /*Redux- thunk */
+  useEffect((data) => {
+    if (!data) {
+      dispatch(fetchHome(data));
+    }
+  }, []);
+  /*Redux- thunk */
 
-/*Redux- thunk */
-useEffect((data) => {
-  if(!data){
-    dispatch(fetchHome(data))
-  }
-}, [])
-/*Redux- thunk */
-
-
-
-/*Call  API Page Home */
+  /*Call  API Page Home */
   // const [state, setState] = useState({
   //   loading: true,
   //   data: {},
@@ -44,11 +46,11 @@ useEffect((data) => {
   //     });
   //   }
   // }, []);
-/*Call  API Page Home */
-const {t}= useTranslate()
+  /*Call  API Page Home */
+  const { t } = useTranslate();
 
-  if(loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -56,7 +58,9 @@ const {t}= useTranslate()
       <Banner />
       <ListCourse
         maintitle="Khóa học Offline"
-        topdes={t("The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal")}
+        topdes={t(
+          "The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal"
+        )}
         list={data.offline}
       />
       <ListCourse maintitle="Khóa học Online" list={data.online} />
@@ -67,4 +71,3 @@ const {t}= useTranslate()
     </main>
   );
 }
-
