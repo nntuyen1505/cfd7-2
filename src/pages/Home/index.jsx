@@ -14,15 +14,15 @@ import { fetchHome } from "../../store/actions/authActions";
 import { useTranslate } from "../../core";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const { data, loading } = useSelector((store) => store.course);
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
+
+  const dispatch = useDispatch();
+  const { data, loading } = useSelector((store) => store.course);
 
   /*Redux- thunk */
   useEffect((data) => {

@@ -50,8 +50,7 @@ export function Header({ openLogin }) {
 
 
 
-
-          <select name="" id=""  onChange={changeLang}>
+          <select name="" id="translate"  onChange={changeLang}>
             <option value="en">English</option>
             <option value="vn">Viet Nam</option>
           </select>

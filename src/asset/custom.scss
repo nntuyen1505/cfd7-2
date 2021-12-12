@@ -31,3 +31,16 @@
             border: 1px solid var(--color-btn);
             background: #00afab;
         }
+        
+        select#translate {
+            width: 93px;
+            height: 43px;
+            border: none;
+            text-align: center;
+            background: #00afab;
+            border-radius: 5px;
+            font-size: 15px;
+            color: white;
+            display: block;
+            margin-right: 10px;
+        }
