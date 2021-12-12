@@ -2,6 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export function Footer() {
+  const backtotop=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }
     return (
         <footer id="footer">
         <div className="container">
@@ -46,7 +52,7 @@ export function Footer() {
               </nav>
             </div>
           </div>
-          <Link to="#" className="back-to-top">
+          <Link to="#" className="back-to-top" onClick={()=>backtotop()}>
             <div className="line" />
             CUỘN LÊN
           </Link>
