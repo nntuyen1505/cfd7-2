@@ -1,4 +1,4 @@
-export const api = 'http://cfd-reactjs.herokuapp.com'
+export const api = 'https://cfd-reactjs.herokuapp.com'
 
 /*Viết hàm ngắn cho call api thường cho sử  dụng handleResponse */
 // export const CallApi = (url,option)=>{
