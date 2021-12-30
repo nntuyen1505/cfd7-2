@@ -7,7 +7,7 @@ export function ProjectDone() {
                   <div className="col-md-6 course">
                     <div className="wrap">
                       <a href="#" className="cover">
-                        <img src="img/img8.png" alt="" />
+                        <img src="/img/img8.png" alt="" />
                       </a>
                       <div className="info">
                         <a href="#" className="name">
@@ -31,7 +31,7 @@ export function ProjectDone() {
                   <div className="col-md-6 course">
                     <div className="wrap">
                       <a href="#" className="cover">
-                        <img src="img/img8.png" alt="" />
+                        <img src="/img/img1.png" alt="" />
                       </a>
                       <div className="info">
                         <a href="#" className="name">

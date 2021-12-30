@@ -5,7 +5,7 @@ export function YourCourse() {
         <div className="tab2" >
                 <div className="item">
                   <div className="cover">
-                    <img src="img/img3.png" alt="" />
+                    <img src="/img/img3.png" alt="" />
                   </div>
                   <div className="info">
                     <a href="#" className="name">
@@ -36,7 +36,7 @@ export function YourCourse() {
                 </div>
                 <div className="item">
                   <div className="cover">
-                    <img src="img/img7.png" alt="" />
+                    <img src="/img/img7.png" alt="" />
                   </div>
                   <div className="info">
                     <a href="#" className="name">

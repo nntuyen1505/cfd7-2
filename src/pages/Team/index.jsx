@@ -4,53 +4,53 @@ import Member from  './components/Member'
 export default function Team() {
     var mentors =[
         {
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'trần nghĩa',
             title:'Founder &amp; Creative Front-End Developer',
         },
         {
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'đặng thuyền vương',
             title:'Co-Founder &amp; Fullstack Developer'
         },
         {
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'đặng thuyền quân',
             title:'Co-Founder &amp; Backend Developer'
         },
         {
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'nguyễn đức huy',
             title:'Co-Founder &amp; Front-End Developer'
         }
     ]
     var students=[
         {
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'Diệp anh thy',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'huỳnh tiến tài',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'Ngô thành long',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'trần anh tuấn',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'ngô thành long',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'nguyễn thành tùng',
             title:'CFD1-Offline'
         },{
-            img:'img/thumb-member.jpg',
+            img:'img/Intersect.png',
             name: 'phạm thành trung',
             title:'CFD1-Offline'
         },
